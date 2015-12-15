@@ -63,7 +63,8 @@ var app = {
       url: app.server,
       type: 'GET',
       contentType: 'plain/text',
-      data: { order: '-createdAt'},
+      // data: { order: '-createdAt'},
+      data:{},
       success: function(data) {
         data = JSON.parse(data);
         console.log('data: ', data)
