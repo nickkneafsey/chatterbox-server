@@ -45,7 +45,7 @@ var app = {
       url: app.server,
       type: 'POST',
       data: JSON.stringify(data),
-      contentType: 'application/json',
+      contentType: 'plain/text',
       success: function (data) {
         // Trigger a fetch to update the messages, pass true to animate
         app.fetch();
@@ -62,9 +62,10 @@ var app = {
     $.ajax({
       url: app.server,
       type: 'GET',
-      contentType: 'application/json',
+      contentType: 'plain/text',
       data: { order: '-createdAt'},
       success: function(data) {
+        data = JSON.parse(data);
         console.log('data: ', data)
         // Don't bother if we have nothing to work with
         if (!data.results || !data.results.length) { return; }

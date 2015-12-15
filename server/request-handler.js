@@ -1,22 +1,40 @@
-var returnObj = {results: []};
+var returnObj = {results: [
+ {
+    createdAt: "2015-12-15T03:29:29.994Z",
+    objectId: "Mf14QKvyPD",
+    roomname: "Ice Fortress",
+    text: "what up dog",
+    updatedAt: "2015-12-15T03:29:29.994Z",
+    username: "Mr. Freeze"
+}
+
+  ]};
+
 
 exports.requestHandler = function(request, response) {
   console.log("Serving request type " + request.method + " for url " + request.url);
-  console.log("path: " + request.url);
+  // console.log("path: " + request.url);
+
 
   var url = request.url;
   var statusCode;
   if (request.method === "GET") {
-    if(url === '/classes/messages' || url === '/classes/room1') {
-      statusCode = 200;
-    } else {
-      statusCode = 404;
-    }
+    console.log('GET');
+    statusCode = 200;
+    var headers = defaultCorsHeaders;
+    headers['Content-Type'] = "application/JSON";
+    var json = JSON.stringify(returnObj);
+    response.writeHead(statusCode, headers);
+    response.end(json);
+    // if(url === '/classes/messages' || url === '/classes/room1') {
+    //   statusCode = 200;
+    // } else {
+    //   statusCode = 404;
+    // }
   }
-
   
   if (request.method ==="POST") {
-      //console.log('dude', request);
+    console.log('POST');
     var requestData="";
 
     request.on('data', function(chunk) {
@@ -28,27 +46,38 @@ exports.requestHandler = function(request, response) {
       returnObj.results.push(ob);
       //console.log(returnObj);
     });
-    console.log("OB", returnObj);
-
-    if(url === '/classes/messages' || url === '/classes/room1') {
-      
-
-      statusCode = 201;
-    } else {
-      statusCode = 404;
-    }
+    
+    statusCode = 201;
+    var headers = defaultCorsHeaders;
+    headers['Content-Type'] = "application/JSON";
+    var json = JSON.stringify(returnObj);
+    response.writeHead(statusCode, headers);
+    response.end(json);
+    // if(url === '/classes/messages' || url === '/classes/room1') {
+    //   statusCode = 201;
+    // } else {
+    //   statusCode = 404;
+    // }
   }
 
-  // See the note below about CORS headers.
-  var headers = defaultCorsHeaders;
+  if (request.method === 'OPTIONS'){
+    console.log('OPTIONS');
+    statusCode = 200;
+    var headers = defaultCorsHeaders;
+    headers['Content-Type'] = "text/plain";
+    response.writeHead(statusCode, headers);
+    response.end();
+  }
+  // // See the note below about CORS headers.
+  // var headers = defaultCorsHeaders;
   
 
-  // headers['Content-Type'] = "text/plain";
-  headers['Content-Type'] = "application/JSON";
-  var json = JSON.stringify(returnObj);
-  response.writeHead(statusCode, headers);
+  // // headers['Content-Type'] = "text/plain";
+  // headers['Content-Type'] = headerType;
+  // var json = JSON.stringify(returnObj);
+  // response.writeHead(statusCode, headers);
 
-  response.end(json);
+  // response.end(json);
 };
 
 var defaultCorsHeaders = {
