@@ -14,9 +14,6 @@ var returnObj = {results: [
 exports.requestHandler = function(request, response) {
   console.log("Serving request type " + request.method + " for url " + request.url);
   // console.log("path: " + request.url);
-
-
-  var url = request.url;
   var statusCode;
   if (request.method === "GET") {
     console.log('GET');
@@ -26,11 +23,6 @@ exports.requestHandler = function(request, response) {
     var json = JSON.stringify(returnObj);
     response.writeHead(statusCode, headers);
     response.end(json);
-    // if(url === '/classes/messages' || url === '/classes/room1') {
-    //   statusCode = 200;
-    // } else {
-    //   statusCode = 404;
-    // }
   }
   
   if (request.method ==="POST") {
@@ -53,11 +45,6 @@ exports.requestHandler = function(request, response) {
     var json = JSON.stringify(returnObj);
     response.writeHead(statusCode, headers);
     response.end(json);
-    // if(url === '/classes/messages' || url === '/classes/room1') {
-    //   statusCode = 201;
-    // } else {
-    //   statusCode = 404;
-    // }
   }
 
   if (request.method === 'OPTIONS'){

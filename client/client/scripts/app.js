@@ -5,7 +5,7 @@ var app = {
   //to all messages sent by the user
   //change server 
   // server: 'https://api.parse.com/1/classes/chatterbox/',
-  server: 'http://localhost:3000/class/messages',
+  server: 'http://localhost:3000/messages',
   username: 'anonymous',
   roomname: 'lobby',
   lastMessageId: 0,
@@ -227,7 +227,7 @@ var app = {
     };
 
     app.send(message);
-
+    
     // Stop the form from submitting
     evt.preventDefault();
   },
