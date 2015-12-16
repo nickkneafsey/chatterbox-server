@@ -7,7 +7,7 @@ var app = {
   // server: 'https://api.parse.com/1/classes/chatterbox/',
   server: 'http://localhost:3000/messages',
   username: 'anonymous',
-  roomname: 'lobby',
+  roomname: 'Lobby',
   lastMessageId: 0,
   friends: {},
 
@@ -67,7 +67,7 @@ var app = {
       data:{},
       success: function(data) {
         data = JSON.parse(data);
-        console.log('data: ', data)
+        console.log('data: ', data);
         // Don't bother if we have nothing to work with
         if (!data.results || !data.results.length) { return; }
 
@@ -89,7 +89,7 @@ var app = {
       },
       error: function(data) {
         console.error('chatterbox: Failed to fetch messages');
-        console.log('data fail: ', data)
+        console.log('data fail: ', data);
       }
     });
   },
@@ -227,7 +227,7 @@ var app = {
     };
 
     app.send(message);
-    
+
     // Stop the form from submitting
     evt.preventDefault();
   },
